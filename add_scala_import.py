@@ -1,6 +1,7 @@
 import sublime, sublime_plugin
 
 CLASSES = sublime.CLASS_WORD_START | sublime.CLASS_PUNCTUATION_START | sublime.CLASS_LINE_END
+PACKAGE_DECL_PREFIXES = ['package ', 'namespace java ']
 
 class ScalaAddImportLine(sublime_plugin.TextCommand):
   def run(self, edit, sym):
@@ -30,8 +31,9 @@ class ScalaFindAndImportSymbol(sublime_plugin.TextCommand):
     for hit in hits:
       with open(hit[0], 'r') as fp:
         for line in fp.readlines():
-          if line.startswith('package '):
-            pkgs.append(line[len('package '):].strip())
+          for prefix in PACKAGE_DECL_PREFIXES:
+            if line.startswith(prefix):
+              pkgs.append(line[len(prefix):].strip())
 
     if not pkgs:
       self.view.set_status('scalaimport', 'Could not find any packages containing "{}"'.format(sym))
