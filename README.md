@@ -13,6 +13,9 @@ Sort (and combine) imports. Will attempt to normalize imports of `a.b.x` and `a.
 ### Remove Unused imports (`Cmd+Shift+j`) (TODO)
 Remove imports of specific symbols that do not appear in the rest of the file. Does not remove wildcard (`a.b._`) imports or imports with a final component starting with a lowercase letter, as these are usually used implicitly, which cannot be determined via simple text search.
 
-# Authors
+# About
+The import pasrsing and manipulation logic is copied from https://github.com/foursquare/source_code_analysis.
+
+## Authors
 - [dt](/dt)
 - [benjyw](/benjyw)
